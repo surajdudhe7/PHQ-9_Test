@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHQ-9 Test & Emotion Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f3f6fb;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Container Layout */
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* Camera Section */
+        .camera {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eef1f6;
+            padding: 10px;
+        }
+
+        video {
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Question Section */
+        .question-section {
+            padding: 20px;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .options {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            PHQ-9 Test & Emotion Detection
+        </div>
+
+        <!-- Camera Section -->
+        <div class="camera">
+            <video id="videoElement" autoplay></video>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-section">
+            <div class="question">{{ question }}</div>
+            <form method="POST">
+                <div class="options">
+                    <label><input type="radio" name="response" value="0" required> Not at all</label>
+                    <label><input type="radio" name="response" value="1"> Several days</label>
+                    <label><input type="radio" name="response" value="2"> More than half the days</label>
+                    <label><input type="radio" name="response" value="3"> Nearly every day</label>
+                </div>
+                <button type="submit">Next</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Your emotions are being analyzed in real-time...
+        </div>
+    </div>
+
+    <script>
+        // Access the camera and display video feed
+        const video = document.getElementById('videoElement');
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error("Error accessing the camera:", error);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
